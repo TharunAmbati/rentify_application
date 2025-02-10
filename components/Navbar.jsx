@@ -28,6 +28,17 @@ const Navbar = () => {
     setAuthProviders();
   }, []);
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await signIn('google', {
+        callbackUrl: '/',
+        redirect: true,
+      });
+    } catch (error) {
+      console.error('Sign in error:', error);
+    }
+  };
+
   return (
     <nav className='bg-blue-700 border-b border-blue-500'>
       <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -110,12 +121,12 @@ const Navbar = () => {
                 {providers &&
                   Object.values(providers).map((provider, index) => (
                     <button
-                      onClick={() => signIn(provider.id)}
+                      onClick={handleGoogleSignIn}
                       key={index}
                       className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
                     >
                       <FaGoogle className='text-white mr-2' />
-                      <span>Login or Register</span>
+                      <span>Login with Google</span>
                     </button>
                   ))}
               </div>
@@ -261,11 +272,11 @@ const Navbar = () => {
               providers &&
               Object.values(providers).map((provider, index) => (
                 <button
-                  onClick={() => signIn(provider.id)}
+                  onClick={handleGoogleSignIn}
                   key={index}
                   className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
                 >
-                  <span>Login or Register</span>
+                  <span>Login with Google</span>
                 </button>
               ))}
           </div>

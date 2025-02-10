@@ -17,7 +17,14 @@ export const authOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: '/login',
+  },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
     // Invoked on successful signin
     async signIn({ profile }) {
       // 1. Connect to database
